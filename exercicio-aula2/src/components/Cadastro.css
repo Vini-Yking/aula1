@@ -1,0 +1,19 @@
+* {
+    margin: auto;
+}
+
+.formulario {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-block: 2rem;
+}
+
+input {
+    margin-block: 1rem;
+}
+
+button {
+    width: 10rem;
+    border-radius: 0.5rem;
+}

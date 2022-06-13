@@ -57,7 +57,9 @@ const Cadastro = () => {
         />
       </label>
       <label>
-        Sexo: masculino
+        Sexo:
+        <br />
+        masculino
         <input
           type="radio"
           name="sexo"

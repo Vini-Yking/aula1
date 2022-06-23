@@ -5,10 +5,10 @@ import { useState, useEffect } from 'react'
 function App() {
 
   const [drink, setDrink] = useState([])
-  // const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const getDrink = async () => {
-    // setLoading(true)
+    setLoading(true)
     try {
       const { data } = await axios.get("https://www.thecocktaildb.com/api/json/v1/1/random.php")
       setDrink(data)
@@ -18,7 +18,11 @@ function App() {
     }
 
   }
-
+const ingredientLoad = (load,ingr)=>{
+  if (!load && ingr){
+    return true
+  }
+}
 
   useEffect(() => {
     getDrink();
@@ -31,14 +35,14 @@ function App() {
 
       <h1>DRINK ME!</h1>
       <button onClick={getDrink} >Sirva esse drinque!</button>
-      <p>{drink.strDrink}</p>
-      <p>
-        {drink.length !== 0 && <img src={drink.drinks[0].strDrinkThumb} width="300" alt={drink.drinks[0].strAlcoholic} />}
-      </p>
-      <p>ingredientes</p>
-      {drink.drinks[0].strIngredient1 && <p>1- {drink.drinks[0].strIngredient1}</p>}
-      {drink.drinks[0].strIngredient2 && <p>2-{drink.drinks[0].strIngredient2}</p>}
-      {drink.drinks[0].strIngredient3 && <p>3-{drink.drinks[0].strIngredient3}</p>}
+      <p>{drink.length !== 0 && drink.length !== 0 && drink.drinks[0].strDrink}</p>
+      <p>{
+        drink.length !== 0 && <img src={drink.drinks[0].strDrinkThumb} onLoad={() => setLoading(false)} width="300" alt={drink.drinks[0].strAlcoholic} />} </p>
+      <p> {!loading ? "ingredientes" : "carregando"}</p>
+      <p>{ ingredientLoad(loading, drink.drinks[0].strIngredient1) && "1-" + drink.drinks[0].strIngredient1}</p>
+      <p>{ ingredientLoad(loading, drink.drinks[0].strIngredient2) && "2-" + drink.drinks[0].strIngredient2}</p>
+      <p>{ ingredientLoad(loading, drink.drinks[0].strIngredient3) && "3-" + drink.drinks[0].strIngredient3}</p>
+      
 
     </div>
 
